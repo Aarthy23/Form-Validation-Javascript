@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS - Form Validation</title>
+</head>
+<style>
+    h1 {
+        font-family: sans-serif;
+        font-size: 30px;
+        margin-left: 150px;
+    }
+    label {
+        margin-left: 60px;
+        font-family: sans-serif;
+        color: blue;
+    }
+    input,#country {
+        margin-left: 60px;
+        width: 300px;
+        height: 30px;
+        border-style: solid;
+        border-color: lightgray;
+    }
+    #submit{
+        margin-left: 60px;
+        width: 150px;
+        height: 30px;
+        border-style: solid;
+        border-color: lightgray;
+    }
+</style>
+
+<body>
+
+    <!-- HTML Form -->
+    <form name="user_form" onsubmit="return(formValidation())">
+        <h1>User Form</h1>
+  
+        <label for="name">Name</label><br />
+        <input type="text" id="name"/><br /><br />
+  
+        <label for="email">Email</label><br />
+        <input type="text" id="email"/> <br /><br />
+
+        <label for="password">Password</label><br />
+        <input type="text" id="password"/> <br /><br />
+
+        <label for="confirm_password">Confirm Password</label><br />
+        <input type="text" id="confirm_password"/> <br /><br />
+
+        <label for="zip">Zip code</label><br />
+        <input type="text" id="zip"/><br /><br />
+  
+        <label for="country">State</label><br />
+        <select id="country">
+            <option value="-1">Choose ur State</option>
+            <option value="1">Tamilnadu</option>
+            <option value="2">Andhra</option>
+            <option value="3">Karnataka</option>
+        </select> <br /><br />
+
+        <input type="submit" id="submit">
+    </form>
+
+    <!-- Javascript Code -->
+    <script>
+        function formValidation(){
+
+            user_name = document.getElementById("name").value;
+            user_email = document.getElementById("email").value;
+            user_zipcode = document.getElementById("zip").value;
+            user_country = document.getElementById("country").value;
+            user_password = document.getElementById("password").value;
+            user_confirm_password = document.getElementById("confirm_password").value;
+
+
+
+            if(user_name == ""){
+                alert("Please provide your name !!!");
+                document.user_form.name.focus();
+                return false;
+            }
+
+            emailPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@])[a-zA-Z\d@.]+$/;
+            if(user_email = "" || !emailPattern.test(user_email)){
+                alert("Please provide your Email (must contain characters, numbers and spcl symbols)!!!");
+                document.user_form.email.focus();
+                return false;
+            }
+
+
+            if(user_password == ""){
+                alert("Please provide the password !!!");
+                document.user_form.password.focus();
+                return false;
+            }
+
+            if(user_confirm_password == "" || user_password != user_confirm_password){
+                alert("Please enter the correct password !!!");
+                document.user_form.confirm_password.focus();
+                return false;
+            }
+
+
+            zipPattern = /^[0-9]{6,}$/;
+            if(user_zipcode = "" || !zipPattern.test(user_zipcode)){
+                alert("Please provide your ZipCode !!!");
+                document.user_form.zip.focus();
+                return false;
+            }
+
+            
+            if(user_country == "-1"){
+                alert("Please select your Country !!!");
+                document.user_form.country.focus();
+                return false;
+            }
+
+        return (true);
+        }
+
+
+    </script>
+    
+</body>
+</html>
